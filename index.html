@@ -60,21 +60,32 @@
     </div>
     <textarea class="typed-text" placeholder="Type the text exactly as it appears in the image"></textarea>
     <div class="button-container">
-        <button onclick="checkText()">OK</button>
+        <button onclick="verifyText()">OK</button>
     </div>
     <div class="result-text">
-        <p id="result"></p>
+        <p id="outputMessage"></p>
     </div>
+
     <script>
-        function checkText() {
-            var typedText = document.querySelector('.typed-text').value;
-            var originalText = "The agent is returned through time to a particular point, where they meet a mysterious stranger. Through contact with the stranger, the agent starts to reveal a tangled mess of time travel, cause and effect, and the effects of tampering with the timeline. Through a series of flashbacks and non-linear plot, it is revealed that the stranger is central to the lead-up to the bombing. The agent's encounter with the stranger generates a sequence of temporal paradoxes and logical inconsistencies, which have the potential to destroy the entire timeline.";
-            if (typedText === originalText) {
+        function decodeBase64(encoded) {
+            return atob(encoded);
+        }
+
+        function verifyText() {
+            var userInput = document.querySelector('.typed-text').value;
+
+            var encodedText = "VGhlIGFnZW50IGlzIHJldHVybmVkIHRocm91Z2ggdGltZSB0byBhIHBhcnRpY3VsYXIgcG9pbnQsIHdoZXJlIHRoZXkgbWVldCBhIG15c3RlcmlvdXMgc3RyYW5nZXIuIFRocm91Z2ggY29udGFjdCB3aXRoIHRoZSBzdHJhbmdlciwgdGhlIGFnZW50IHN0YXJ0cyB0byByZXZlYWwgYSB0YW5nbGVkIG1lc3Mgb2YgdGltZSB0cmF2ZWwsIGNhdXNlIGFuZCBmZmVjdCwgYW5kIHRoZSBlZmZlY3RzIG9mIHRhbXBlcmluZyB3aXRoIHRoZSB0aW1lbGluZS4gVGhyb3VnaCBhIHNlcmllcyBvZiBmbGFzaGJhY2tzIGFuZCBub24tbGluZWFyIHBsb3QsIGl0IGlzIHJldmVhbGVkIHRoYXQgdGhlIHN0cmFuZ2VyIGlzIGNlbnRyYWwgdG8gdGhlIGxlYWQtdXAgdG8gdGhlIGJvbWJpbmcuIFRoZSBhZ2VudCdzIGVuY291bnRlciB3aXRoIHRoZSBzdHJhbmdlciBnZW5lcmF0ZXMgYSBzZXF1ZW5jZSBvZiB0ZW1wb3JhbCBwYXJhZG94ZXMgYW5kIGxvZ2ljYWwgaW5jb25zaXN0ZW5jaWVzLCB3aGljaCBoYXZlIHRoZSBwb3RlbnRpYWwgdG8gZGVzdHJveSB0aGUgZW50aXJlIHRpbWVsaW5lLg==";
+            var encodedKey = "MTIz"; // "123"
+
+            var correctText = decodeBase64(encodedText);
+            var secretKey = decodeBase64(encodedKey);
+
+            if (userInput === correctText) {
                 document.querySelector('.result-text').style.display = 'block';
-                document.querySelector('#result').innerText = 'Damn that took so long.....anyways as promised\nKey : 123';
+                document.querySelector('#outputMessage').innerText = `Damn that took so long.....anyways as promised\nKey : ${secretKey}`;
             } else {
                 document.querySelector('.result-text').style.display = 'block';
-                document.querySelector('#result').innerText = 'Incorrect! Please try again.';
+                document.querySelector('#outputMessage').innerText = 'Incorrect! Please try again.';
             }
         }
     </script>
