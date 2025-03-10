@@ -1,84 +1,180 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typing Challenge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('mc.jpg') no-repeat center center fixed;
+            background-size: cover;
+            background-attachment: fixed;
+            position: relative;
         }
 
-        .image-container {
-            width: 800px;
-            margin: 40px auto;
-            text-align: center;
-        }
-
-        .image-container img {
+        .background-blur {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
-            border: 1px solid #ccc;
+            height: 100%;
+            filter: blur(8px);
+            z-index: -1;
         }
 
-        .typed-text {
-            width: 1000px;
-            height: 10000;
-            margin: 20px auto;
-            padding: 10px;
-            border: 1px solid #ccc;
-            font-size: 18px;
-            position: center;
-            top: 1000px;
-        }
-
-        .button-container {
-            width: 800px;
-            margin: 20px auto;
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
+            backdrop-filter: blur(8px); 
         }
 
-        .button-container button {
-            padding: 10px 20px;
+        .container h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        #challenge-paragraph {
+            font-size: 20px;
+            color: #333;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            user-select: none; 
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            resize: none;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+        }
+
+        button {
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 15px 30px;
+            border: none;
             font-size: 18px;
             cursor: pointer;
+            border-radius: 25px;
+            margin-top: 20px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        .result-text {
-            width: 800px;
-            margin: 20px auto;
-            padding: 10px;
-            border: 1px solid #ccc;
-            font-size: 18px;
+        button:hover {
+            background: linear-gradient(135deg, #81C784, #4CAF50);
+            transform: translateY(-4px);  /* Hover effect for button */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(2px); 
+        }
+
+        #success-message {
+            color: green;
+            font-size: 22px;
+            font-weight: 600;
             display: none;
+            margin-top: 20px;
         }
+
+        #error-message {
+            color: red;
+            font-size: 22px;
+            font-weight: 600;
+            display: none;
+            margin-top: 20px;
+        }
+
     </style>
-
 </head>
-
 <body>
-    <div class="image-container">
-        <img src="https://github.com/navneetmohan/imape_typee/blob/main/sentence2.png?raw=true" alt="Image to type">
-    </div>
-    <textarea class="typed-text" placeholder="Type the text exactly as it appears in the image"></textarea>
-    <div class="button-container">
-        <button onclick="checkText()">Done ?</button>
-    </div>
-    <div class="result-text">
-        <p id="result"></p>
-    </div>
-    <script>
-        function checkText() {
-            var typedText = document.querySelector('.typed-text').value;
-            var originalText = "The agent is returned through time to a particular point, where they meet a mysterious stranger. Through contact with the stranger, the agent starts to reveal a tangled mess of time travel, cause and effect, and the effects of tampering with the timeline. Through a series of flashbacks and non-linear plot, it is revealed that the stranger is central to the lead-up to the bombing. The agent's encounter with the stranger generates a sequence of temporal paradoxes and logical inconsistencies, which have the potential to destroy the entire timeline.";
-            if (typedText === originalText) {
-                document.querySelector('.result-text').style.display = 'block';
-                document.querySelector('#result').innerText = 'Damn you took an easier route....\nKey : 123';
-            } else {
-                document.querySelector('.result-text').style.display = 'block';
-                document.querySelector('#result').innerText = 'hmmmm...\n\n you know sometimes we gotta accept what life gives us...\n\nin this situation a "try again"';
-            }
-        }
-    </script>
-</body>
 
+    <div class="background-blur"></div>
+
+    <div class="container">
+        <h1>Type till ya die</h1>
+        
+        <!-- Paragraph -->
+        <p id="challenge-paragraph">
+            This movie follows a time-traveling agent on a final mission to stop a mysterious criminal responsible for deadly bombings. Along the way, the agent recruits an individual with unexpected ties to the case. As they work through time loops and paradoxes, they uncover surprising truths about their own identities and destinies. The film explores themes of fate, free will, and the consequences of time travel.
+        </p>
+
+        <!-- Text area for input -->
+        <textarea id="user-input" placeholder="Type here..."></textarea>
+        <br>
+        <button onclick="checkInput()">Check</button>
+
+        <!-- Success and error messages -->
+        <p id="success-message">Flag : 123</p>
+        <p id="error-message">Try again... Will ya ?</p>
+
+    </div>
+
+<script>
+    function checkInput() {
+        const userInput = document.getElementById('user-input').value;
+        const challengeParagraph = document.getElementById('challenge-paragraph').innerText;
+
+        // Check if the user input matches the paragraph exactly
+        if (userInput === challengeParagraph) {
+            document.getElementById('success-message').style.display = 'block';
+            document.getElementById('error-message').style.display = 'none';
+        } else {
+            document.getElementById('success-message').style.display = 'none';
+            document.getElementById('error-message').style.display = 'block';
+        }
+    }
+
+    // Disable right-click and keyboard shortcuts (not foolproof)
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(event) {
+        // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+        if ((event.key === 'F12') || 
+            (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J')) ||
+            (event.ctrlKey && event.key === 'U')) {
+            event.preventDefault();
+        }
+    });
+</script>
+
+</body>
 </html>
